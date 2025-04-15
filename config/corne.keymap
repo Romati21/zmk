@@ -15,6 +15,7 @@
 #define RSE 2
 #define FLR 3
 #define ADJ 4
+#
 
 &lt { quick_tap_ms = <219>; };
 &mt { quick_tap_ms = <219>; };
