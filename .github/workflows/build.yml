@@ -1,28 +1,14 @@
-name: Build ZMK Firmware
-
+name: Compile ZMK
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    paths:
+      - "config/*.keymap"
+      - "config/*.dtsi"
+      - "config/boards/shields/*.conf"
+      - "config/boards/shields/*.overlay"
+      - "config/boards/*/*/*.keymap"
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        shield: [ corne_peripheral_left, corne_peripheral_right ]
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup ZMK
-      uses: zmkfirmware/zmk-build-action@v2
-      with:
-        zmk_version: main
-    - name: Build Firmware
-      run: |
-        west build -s zmk/app -b nice_nano_v2 -d build/${{ matrix.shield }} -- -DZMK_CONFIG=$GITHUB_WORKSPACE/config -DSHIELD=${{ matrix.shield }}
-    - name: Archive Firmware
-      uses: actions/upload-artifact@v4
-      with:
-        name: firmware-${{ matrix.shield }}
-        path: build/${{ matrix.shield }}/zephyr/zmk.uf2
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
