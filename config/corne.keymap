@@ -8,22 +8,24 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <behaviors.dtsi>
-
-#define DEF 0
-#define LWR 1
-#define RSE 2
-#define ADJ 3
-
-// Увеличиваем тайминги для более надежного распознавания "hold"
-/ { quick_tap_ms = <300>; tapping-term-ms = <250>; };
-&mt { quick_tap_ms = <300>; tapping-term-ms = <250>; flavor = "hold-preferred"; };
 
 / {
+    chosen {
+        zmk,behaviors = &mt;
+    };
+
+    behaviors {
+        mt: mod_tap {
+            compatible = "zmk,behavior-mod-tap";
+            #binding-cells = <2>;
+            quick_tap_ms = <300>;
+            tapping-term-ms = <250>;
+            flavor = "hold-preferred";
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
-
-        // Комбинации для скобок и символов (можно закомментировать, если предпочтете слой)
         ParaLeft {
             bindings = <&kp LEFT_PARENTHESIS>;
             key-positions = <4 5>;
