@@ -16,7 +16,7 @@
 #define ADJ 3
 
 // Увеличиваем тайминги для более надежного распознавания "hold"
-< { quick_tap_ms = <300>; tapping-term-ms = <250>; };
+/ { quick_tap_ms = <300>; tapping-term-ms = <250>; };
 &mt { quick_tap_ms = <300>; tapping-term-ms = <250>; flavor = "hold-preferred"; };
 
 / {
