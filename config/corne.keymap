@@ -3,6 +3,12 @@
  *
  * SPDX-License-Identifier: MIT
  * To use home rows - &hm LSHFT F
+ *
+ * RUSMODE: Спецсимволы работают одинаково на US и RU раскладках.
+ * Реализовано архитектурой самой раскладки - ZMK отправляет US keycodes,
+ * а все символы (. , ; ' [ ] / \) находятся на выделенных клавишах.
+ * Системная настройка: kb_layout=us,ru в Hyprland (modules/home/hyprland/hyprland.nix)
+ * Переключение раскладок: Win+Space (grp:win_space_toggle)
  */
 
 #include <behaviors.dtsi>
